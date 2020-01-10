@@ -19,16 +19,16 @@ public class Board extends JFrame
     
     public Board()
     {
-        img[0]=new javax.swing.ImageIcon(getClass().getResource("Pics/pecora.jpg"));
-        img[1]=new javax.swing.ImageIcon(getClass().getResource("Pics/cane.jpg"));
+        img[0]=new javax.swing.ImageIcon(getClass().getResource("Pics/cane.jpg"));
+        img[1]=new javax.swing.ImageIcon(getClass().getResource("Pics/capra.jpg"));
         img[2]=new javax.swing.ImageIcon(getClass().getResource("Pics/cavallo.jpg"));
         img[3]=new javax.swing.ImageIcon(getClass().getResource("Pics/coniglio.jpg"));
-        img[4]=new javax.swing.ImageIcon(getClass().getResource("Pics/delfino.jpg"));
-        img[5]=new javax.swing.ImageIcon(getClass().getResource("Pics/elefante.jpg"));
-        img[6]=new javax.swing.ImageIcon(getClass().getResource("Pics/gallina.jpg"));
-        img[7]=new javax.swing.ImageIcon(getClass().getResource("Pics/gatto.jpg"));
-        img[8]=new javax.swing.ImageIcon(getClass().getResource("Pics/maiale.jpg"));
-        img[9]=new javax.swing.ImageIcon(getClass().getResource("Pics/mucca.jpg"));
+        img[4]=new javax.swing.ImageIcon(getClass().getResource("Pics/gatto.jpg"));
+        img[5]=new javax.swing.ImageIcon(getClass().getResource("Pics/maiale.jpg"));
+        img[6]=new javax.swing.ImageIcon(getClass().getResource("Pics/mucca.jpg"));
+        img[7]=new javax.swing.ImageIcon(getClass().getResource("Pics/muflone.jpg"));
+        img[8]=new javax.swing.ImageIcon(getClass().getResource("Pics/oca.jpg"));
+        img[9]=new javax.swing.ImageIcon(getClass().getResource("Pics/riccio.jpg"));
         
         int pairs=10;
         int i=0;
