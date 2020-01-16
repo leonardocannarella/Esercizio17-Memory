@@ -15,7 +15,9 @@ public class Board extends JFrame
     private Card c1;
     private Card c2;
     private Timer t;
+    private int scoreboard=0;
     private javax.swing.ImageIcon[] img =new javax.swing.ImageIcon[10];
+    private JLabel scorelbl = new JLabel("Punteggio: "+scoreboard, SwingConstants.CENTER);
     
     public Board()
     {
@@ -115,7 +117,7 @@ public class Board extends JFrame
                     }
                     catch(IOException exception)
                     {
-                        System.out.println("Nessuna partira salvata!");
+                        System.out.println("Nessuna partita salvata!");
                     }
                     catch(ClassNotFoundException exception)
                     {
@@ -123,6 +125,8 @@ public class Board extends JFrame
                     }
                 }
             });
+        pane.add(scorelbl);
+
         setTitle("Memory Match");
     }
 
@@ -154,6 +158,8 @@ public class Board extends JFrame
             c1.setIcon(img[c1.getId()]);
             //c2.setIcon(new javax.swing.ImageIcon(getClass().getResource("Pics/cane.jpg")));
             c2.setIcon(img[c2.getId()]);
+            scoreboard++;
+            refresh();
             if (this.isGameWon()){
                 JOptionPane.showMessageDialog(this, "You win!");
                 System.exit(0);
@@ -181,17 +187,38 @@ public class Board extends JFrame
     
     public void saveMatch() throws IOException
     {
-        ObjectOutputStream writer = new ObjectOutputStream(new FileOutputStream("match.dat"));
-        writer.writeObject(cards);
-        writer.flush();
-        writer.close();
+        try {
+            File file = new File("match.txt");
+            FileWriter fw = new FileWriter(file);
+            if(scoreboard==0)
+            {
+                fw.write("0");
+                fw.flush();
+                fw.close();
+            }
+            else
+            {
+                fw.write(Integer.toString(scoreboard));
+                fw.flush();
+                fw.close();
+            }
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
     }
     
     public void loadMatch() throws IOException,ClassNotFoundException
     {
-        ObjectInputStream reader = new ObjectInputStream(new FileInputStream("match.dat"));
-        Object temp =reader.readObject();
-        System.out.println(temp);
+        BufferedReader reader = new BufferedReader(new FileReader("match.txt"));
+        String temp = reader.readLine();
+        scoreboard = Integer.parseInt(temp);
+        refresh();
+    }
+
+    public void refresh()
+    {
+        scorelbl.setText("Punteggio: "+scoreboard);
     }
         
 
