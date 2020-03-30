@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
 
-@SuppressWarnings("serial")
 public class Board extends JFrame
 {
     private List<Card> cards;
@@ -80,54 +79,52 @@ public class Board extends JFrame
         }
         pane.add(resetBtn);
         resetBtn.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent ae){
-                    setVisible(false);
-                    Board a = new Board();
-                    a.setPreferredSize(new Dimension(500,500)); //need to use this instead of setSize
-                    a.setLocation(500, 250);
-                    a.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    a.pack();
-                    a.setVisible(true);
-                }
-            });
+        {
+            public void actionPerformed(ActionEvent ae){
+                setVisible(false);
+                Board a = new Board();
+                a.setBounds(50,50,1200,700);
+                a.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                a.setVisible(true);
+            }
+        });
             
         pane.add(saveBtn);
         saveBtn.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent ae){
-                    try
-                    {
-                        saveMatch();
-                    }
-                    catch(IOException exception)
-                    {
-                        System.out.println("Errore sul file!");
-                    }
+        {
+            public void actionPerformed(ActionEvent ae){
+                try
+                {
+                    saveMatch();
                 }
-            });
+                catch(IOException exception)
+                {
+                    System.out.println("Errore sul file!");
+                }
+            }
+        });
             
         pane.add(loadBtn);
         loadBtn.addActionListener(new ActionListener()
-            {
-                public void actionPerformed(ActionEvent ae){
-                    try
-                    {
-                        loadMatch();
-                    }
-                    catch(IOException exception)
-                    {
-                        System.out.println("Nessuna partita salvata!");
-                    }
-                    catch(ClassNotFoundException exception)
-                    {
-                        System.out.println("Errore sul file!");
-                    }
+        {
+            public void actionPerformed(ActionEvent ae){
+                try
+                {
+                    loadMatch();
                 }
-            });
+                catch(IOException exception)
+                {
+                    JOptionPane.showMessageDialog(null, "Nessuna partita salvata!");
+                }
+                catch(ClassNotFoundException exception)
+                {
+                    JOptionPane.showMessageDialog(null, "Errore sul file!");
+                }
+            }
+        });
         pane.add(scorelbl);
 
-        setTitle("Memory Match");
+        setTitle("Memory");
     }
 
     public void doTurn(){
@@ -150,9 +147,9 @@ public class Board extends JFrame
     public void checkCards(){
         if (c1.getId() == c2.getId())
         {//match condition
-            c1.setEnabled(false); //disables the button
+            c1.setEnabled(false);
             c2.setEnabled(false);
-            c1.setMatched(true); //flags the button as having been matched
+            c1.setMatched(true);
             c2.setMatched(true);
             //c1.setIcon(new javax.swing.ImageIcon(getClass().getResource("Pics/cane.jpg")));
             c1.setIcon(img[c1.getId()]);
@@ -161,13 +158,13 @@ public class Board extends JFrame
             scoreboard++;
             refresh();
             if (this.isGameWon()){
-                JOptionPane.showMessageDialog(this, "You win!");
+                JOptionPane.showMessageDialog(this, "Hai vinto!");
                 System.exit(0);
             }
         }
 
         else{
-            c1.setText(""); //'hides' text
+            c1.setText("");
             c1.setIcon(null);
             c2.setText("");
             c2.setIcon(null);
@@ -202,6 +199,7 @@ public class Board extends JFrame
                 fw.flush();
                 fw.close();
             }
+            JOptionPane.showMessageDialog(this, "Punteggio salvato correttamente!");
         }
         catch(IOException e) {
             e.printStackTrace();
@@ -213,6 +211,7 @@ public class Board extends JFrame
         BufferedReader reader = new BufferedReader(new FileReader("match.txt"));
         String temp = reader.readLine();
         scoreboard = Integer.parseInt(temp);
+        JOptionPane.showMessageDialog(this, "Punteggio caricato correttamente da file di testo!");
         refresh();
     }
 

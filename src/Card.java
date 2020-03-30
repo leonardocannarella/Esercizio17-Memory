@@ -1,6 +1,6 @@
 import javax.swing.JButton;
 
-@SuppressWarnings("serial")
+
 public class Card extends JButton{
     private int id;
     private boolean matched = false;
